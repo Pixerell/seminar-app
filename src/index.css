@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'Tektur';
+  src: url('/fonts/Tektur/Tektur-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Tektur', sans-serif;
+  background-color: rgb(90, 203, 255);
+}

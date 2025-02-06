@@ -1,0 +1,61 @@
+.seminar_card{
+    width: 30%;
+    height: 300px;
+    background-color: white;
+    box-shadow: 5px 5px 1px rgb(255, 124, 124);
+    border-radius: 20px;
+    padding-bottom: 15px;
+}
+
+.top_row{
+    max-width: 100%;
+    height: 75%;
+    position: relative;
+}
+
+.seminar_img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+h2{
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: white;
+    text-align: right;
+    text-shadow: 2px 2px 2px black;
+    transform: translate(-5%,-150%);
+}
+
+.bottom_row{
+    height: 25%;
+    padding: 2.5%;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.seminar_datetime_block{
+    width: 100%;
+    margin: auto;
+
+    span{
+        display: inline-block;
+        width: 50%;
+        color: rgb(90, 203, 255);
+        opacity: 0.7;
+        font-style: italic;
+    }
+
+}
+
+.seminar_date {
+    text-align: left;
+}
+.seminar_time{
+    text-align: right;
+}
