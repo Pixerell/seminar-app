@@ -1,10 +1,11 @@
 .seminar_card{
     width: 30%;
-    height: 300px;
+    min-height: 400px;
     background-color: white;
     box-shadow: 5px 5px 1px rgb(255, 124, 124);
     border-radius: 20px;
     padding-bottom: 15px;
+    margin: 10px;
 }
 
 .top_row{
@@ -22,14 +23,15 @@
 }
 
 h2{
-    position: absolute;
-    width: 100%;
+    position: absolute;    
+    width: 90%;
     margin: 0;
-    padding: 0;
     color: white;
     text-align: right;
     text-shadow: 2px 2px 2px black;
-    transform: translate(-5%,-150%);
+    transform: translate(-1vh,-35vh);
+    margin-left: 5%;
+
 }
 
 .bottom_row{
@@ -39,7 +41,13 @@ h2{
     background-color: white;
 }
 
+.seminar_desc {
+    height: 80%;
+    margin-bottom: 5%;
+}
+
 .seminar_datetime_block{
+    height: 15%;
     width: 100%;
     margin: auto;
 
@@ -58,4 +66,18 @@ h2{
 }
 .seminar_time{
     text-align: right;
+}
+
+@media (max-width: 950px) {
+    .seminar_card{
+        min-width: 45%;
+    }
+    
+}
+
+@media (max-width: 640px) {
+    .seminar_card{
+        width: auto;
+    }
+    
 }
