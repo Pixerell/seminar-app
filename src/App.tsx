@@ -31,6 +31,7 @@ function App() {
   }, []);
 
 
+
   return (
     <>
     <div className='seminar_wrapper'>
