@@ -1,0 +1,55 @@
+.edit-content{
+    width: 50%;
+    height: 70%;
+    transform: translateY(10%);
+}
+
+.edit-form{
+    height: 75%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    row-gap: 15px;
+
+}
+
+.edit-field{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    row-gap: 5px;
+}
+
+.edit-buttons{
+    display: flex;
+    justify-content: center;
+    column-gap: 10%;
+    height: 20%;
+    width: 100%;
+    padding: 2.5%;
+    box-sizing: border-box;
+
+}
+
+
+.edit-yes {
+    background-color: rgb(178, 233, 255);
+}
+
+.edit-no{
+    background-color: rgb(255, 178, 178);
+}
+
+@media (max-width: 500px) {
+    .edit-form{
+        height: 50%;
+    }
+    .edit-buttons{
+        height: 50%;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 5%;
+    }
+}

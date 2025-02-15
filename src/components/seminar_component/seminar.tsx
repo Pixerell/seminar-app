@@ -8,8 +8,11 @@ function Seminar({ title, description, date, time, photo, id }: ISeminar) {
 
       const handleDelete = () => {
         console.log(`Deleting seminar with ID: ${id}`);
-        // Here, you would call your API or state update to remove the seminar
     };
+
+    const handleEdit = () => {
+      console.log(`Editing with ID: ${id}`);
+  };
 
 
     return (
@@ -26,7 +29,7 @@ function Seminar({ title, description, date, time, photo, id }: ISeminar) {
           <h2>{title}</h2>  
           <div className='buttons'>
             <Delete_Button onDelete={handleDelete} seminar_title_prop={title}/>
-            <Redact_Button/>
+            <Redact_Button seminar={{id, title, description, date, time, photo }} onEdit={handleEdit} />          
           </div>
         </div>
         <div className='bottom_row'>

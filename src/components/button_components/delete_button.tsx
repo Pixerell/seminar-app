@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './buttons.css'
-import ConfirmModal from '../confirm_modal/confirm_modal';
+import ConfirmModal from '../modals/confirm_modal/confirm_modal';
 
 interface DeleteButtonProps {
     onDelete: () => void;
