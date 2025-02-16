@@ -7,3 +7,7 @@ export interface ISeminar {
     photo: string;
   }
 
+export interface SeminarProps extends ISeminar {
+  //  dispatch: React.Dispatch<FetchActionsType>; 
+    onDelete: (id: number) => void;
+}

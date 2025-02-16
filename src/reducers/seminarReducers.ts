@@ -33,10 +33,21 @@ const initialState: IState = {
           error: action.error || 'An error occurred',
         }
       }
+
+      case FETCH_ACTIONS.DELETE:
+        return {
+          ...state,
+          items: state.items.filter(seminar => seminar.id !== action.id),
+        }
       
       default: {
         return state;
-      }      
+      }
+      case FETCH_ACTIONS.RESTORE:
+        return {
+          ...state,
+          items: action.data || [],
+        };      
     }
   
   }

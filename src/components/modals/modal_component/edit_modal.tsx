@@ -10,12 +10,24 @@ interface EditModalProps {
   onSave: (updatedSeminar: ISeminar) => void;
 }
 
-const EditModal: React.FC<EditModalProps> = ({ seminar, onClose, onSave }) => {
-  const [formData, setFormData] = useState({ ...seminar });
+  const EditModal: React.FC<EditModalProps> = ({ seminar, onClose, onSave }) => {
+    const [formData, setFormData] = useState({
+      ...seminar,
+      date: seminar.date ? new Date(seminar.date).toISOString().split('T')[0] : ''
+    });
+    
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSave = () => {
+    onSave({
+      ...formData,
+      date: new Date(formData.date).toISOString()
+    });
   };
+
 
   return ReactDOM.createPortal(
     <div className="modal-overlay">
@@ -71,7 +83,7 @@ const EditModal: React.FC<EditModalProps> = ({ seminar, onClose, onSave }) => {
           </div>
         </div>
         <div className="edit-buttons">
-          <button onClick={() => onSave(formData)} className="edit-yes modal-button">Сохранить</button>
+          <button onClick={handleSave} className="edit-yes modal-button">Сохранить</button>
           <button onClick={onClose} className="edit-no modal-button">Отменить</button>
         </div>
       </div>

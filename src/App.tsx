@@ -10,6 +10,25 @@ function App() {
   const [state,dispatch] = useReducer(seminarReducer, initialState)
   const {items, loading, error} = state
 
+  const handleDelete = async (id: number) => {
+    const previousState = [...items]; // Бэкап данных, если удаление не сработало
+    try {
+      // Симуляция ошибки, для бэкапа 
+      // await new Promise((_, reject) => setTimeout(() => reject(new Error("СИМУЛИРУЮ ОШИБКУ")), 1000));
+
+      // Оптимистичное удаление
+      dispatch({ type: FETCH_ACTIONS.DELETE, id });
+      await axios.delete(`http://localhost:3000/seminars/${id}`);
+      console.log(`Seminar with ID: ${id} deleted successfully`);
+
+    } catch (error) {
+      console.error("Error deleting seminar:", error);
+      // Если удаление не срабатывает - откат в предыдущий state
+      alert("Failed to delete seminar. Restoring previous state.");
+      dispatch({ type: FETCH_ACTIONS.RESTORE, data: previousState });
+    }
+  };
+
   useEffect(() => {
     dispatch({type: FETCH_ACTIONS.PROGRESS});
 
@@ -53,6 +72,7 @@ function App() {
               date={item.date}
               time={item.time}
               photo={item.photo}
+              onDelete={handleDelete}
             />
            ))
           )

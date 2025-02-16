@@ -16,8 +16,6 @@ const Delete_Button: React.FC<DeleteButtonProps> = ({ onDelete, seminar_title_pr
 
 
 
-
-
     return (
         <>
         <div className='button' onClick={handleDeleteClick}>

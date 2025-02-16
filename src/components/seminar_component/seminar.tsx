@@ -1,14 +1,18 @@
 import './seminar.css'
-import { ISeminar } from '../../types/seminar_interface'
+import {SeminarProps } from '../../types/seminar_interface'
 import Delete_Button from '../button_components/delete_button'
 import Redact_Button from '../button_components/redact_button'
 import def_img from '../../assets/def_image.png'
 
-function Seminar({ title, description, date, time, photo, id }: ISeminar) {
+import React from 'react'
 
-      const handleDelete = () => {
-        console.log(`Deleting seminar with ID: ${id}`);
-    };
+
+function Seminar({ title, description, date, time, photo, id, onDelete }: SeminarProps) {
+
+  const handleDelete = () => {
+    console.log(`Deleting seminar with ID: ${id}`);
+    onDelete(id); // Call the onDelete prop with the seminar id
+  };
 
     const handleEdit = () => {
       console.log(`Editing with ID: ${id}`);
@@ -45,6 +49,5 @@ function Seminar({ title, description, date, time, photo, id }: ISeminar) {
       </div>
     )
   }
-  
-  export default Seminar
-  
+  // Мемо чтобы не ререндерить
+  export default React.memo(Seminar);  

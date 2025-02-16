@@ -11,4 +11,5 @@ export interface IAction {
   type: string; 
   data?: ISeminar[];
   error?: string;
+  id?: number;
 }
