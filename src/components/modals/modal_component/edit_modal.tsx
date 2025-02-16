@@ -11,7 +11,6 @@ interface EditModalProps {
 }
 
 const EditModal: React.FC<EditModalProps> = ({ seminar, onClose, onSave }) => {
-
   // Для обработки ошибок с разными видами дат
   const convertToValidDate = (date: string): string => {
     const [day, month, year] = date.split('.');
@@ -29,14 +28,12 @@ const EditModal: React.FC<EditModalProps> = ({ seminar, onClose, onSave }) => {
     };
 
   const handleSave = () => {
-
     // Форматирование даты. Мне не понравилось, что оно не выглядит как в бдшке XD
     const formattedDate = new Date(formData.date)
     .toLocaleDateString('en-GB') 
     .replace(/\//g, '.');
 
     onSave({
-      
       ...formData,
       date: formattedDate
     });
@@ -48,6 +45,7 @@ const EditModal: React.FC<EditModalProps> = ({ seminar, onClose, onSave }) => {
       <div className="edit-content base-modal">
         <h3>Редактировать Семинар</h3>
         <div className='edit-form'>
+
           <div className='edit-field'>
             <label>Название:</label>
             <input 
@@ -86,6 +84,7 @@ const EditModal: React.FC<EditModalProps> = ({ seminar, onClose, onSave }) => {
               onChange={handleChange} 
             />
           </div>
+
           <div className='edit-field'>
             <label>Ссылка на фото:</label>
             <input 
@@ -95,6 +94,7 @@ const EditModal: React.FC<EditModalProps> = ({ seminar, onClose, onSave }) => {
               onChange={handleChange} 
             />
           </div>
+          
         </div>
         <div className="edit-buttons">
           <button onClick={handleSave} className="edit-yes modal-button">Сохранить</button>

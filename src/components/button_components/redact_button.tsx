@@ -2,6 +2,7 @@ import './buttons.css'
 import { ISeminar } from '../../types/seminar_interface'
 import { useState } from 'react';
 import EditModal from '../modals/modal_component/edit_modal';
+import React from 'react';
 
 interface RedactButtonProps {
     seminar: ISeminar;
@@ -17,7 +18,6 @@ const Redact_Button: React.FC<RedactButtonProps> = ({ seminar, onEdit }) => {
             <div className='button' onClick={() => setShowEdit(true)}>
                 <div className='button_imaging redactb'/>
             </div>
-
             {showEdit && (
                 <EditModal 
                     seminar={seminar}
@@ -32,4 +32,4 @@ const Redact_Button: React.FC<RedactButtonProps> = ({ seminar, onEdit }) => {
     )
 }
 
-export default Redact_Button;
+export default React.memo(Redact_Button);

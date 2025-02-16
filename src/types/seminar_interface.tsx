@@ -1,5 +1,5 @@
 export interface ISeminar {
-    id: number;
+    id: string;
     title: string;
     description: string;
     date: string;
@@ -9,6 +9,6 @@ export interface ISeminar {
 
 export interface SeminarProps extends ISeminar {
   //  dispatch: React.Dispatch<FetchActionsType>; 
-    onDelete: (id: number) => void;
+    onDelete: (id: string) => void;
     onEdit: (updatedSeminar: ISeminar) => void; 
 }

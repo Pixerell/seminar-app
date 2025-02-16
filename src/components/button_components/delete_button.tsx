@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './buttons.css'
 import ConfirmModal from '../modals/confirm_modal/confirm_modal';
+import React from 'react';
 
 interface DeleteButtonProps {
     onDelete: () => void;
@@ -21,7 +22,6 @@ const Delete_Button: React.FC<DeleteButtonProps> = ({ onDelete, seminar_title_pr
         <div className='button' onClick={handleDeleteClick}>
             <div className='button_imaging deleteb'/>
         </div>
-
         {showConfirm && (
             <ConfirmModal 
             message="Вы уверены, что хотите удалить этот семинар?" 
@@ -38,5 +38,5 @@ const Delete_Button: React.FC<DeleteButtonProps> = ({ onDelete, seminar_title_pr
   }
   
   
-  export default Delete_Button
+  export default React.memo(Delete_Button)
   

@@ -1,5 +1,27 @@
 import { FETCH_ACTIONS } from "../actions"
+import { ISeminar } from "../types/seminar_interface";
 import {IAction, IState} from '../types/state_type'
+
+
+// Мемоизация и превращение приходящих айдишников в строки так как json server не поддерживает non-string айди
+const memoizedTransform = (() => {
+  const cache = new Map<string, ISeminar[]>(); 
+
+  return (data: ISeminar[]): ISeminar[] => {
+    const dataKey = JSON.stringify(data); 
+    if (cache.has(dataKey)) {
+      return cache.get(dataKey)!;
+    }
+
+    const result = data.map((seminar) => ({
+      ...seminar,
+      id: String(seminar.id), 
+    }));
+
+    cache.set(dataKey, result); 
+    return result;
+  };
+})();
 
 const initialState: IState = {  
     items: [],
@@ -22,8 +44,8 @@ const initialState: IState = {
         return {
           ...state,
           loading: false,
-          items: action.data || [],
-        }
+          items: action.data ? memoizedTransform(action.data) : [],
+        };
       }
   
       case FETCH_ACTIONS.ERROR: {

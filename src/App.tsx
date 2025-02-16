@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react'
+import { useCallback, useEffect, useReducer } from 'react'
 import './App.css'
 import Seminar from './components/seminar_component/seminar'
 import { initialState, seminarReducer } from './reducers/seminarReducers'
@@ -11,7 +11,7 @@ function App() {
   const [state,dispatch] = useReducer(seminarReducer, initialState)
   const {items, loading, error} = state
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = useCallback(async (id: string) => {
     const previousState = [...items]; // Бэкап данных, если удаление не сработало
     try {
       // Симуляция ошибки, для бэкапа 
@@ -28,9 +28,9 @@ function App() {
       alert("Не получилось удалить семинар, действие отменено.");
       dispatch({ type: FETCH_ACTIONS.RESTORE, data: previousState });
     }
-  };
+  },[items]);
 
-  const handleEdit = async (updatedSeminar: ISeminar) => {
+  const handleEdit = useCallback(async (updatedSeminar: ISeminar) => {
     const previousState = [...items];
     console.log(updatedSeminar, "новый семинар");
     try {
@@ -53,7 +53,7 @@ function App() {
       alert("Не получилось редактировать семинар ;(. Откатываем время назад.");
       dispatch({ type: FETCH_ACTIONS.RESTORE, data: previousState });
     }
-  };
+  }, [items]);
   
   useEffect(() => {
     dispatch({type: FETCH_ACTIONS.PROGRESS});
@@ -62,6 +62,7 @@ function App() {
       try{
         let response = await axios.get("http://localhost:3000/seminars");
         if (response.status === 200) {
+          
           dispatch({type: FETCH_ACTIONS.SUCCESS, data: response.data});
         }
       } catch(err){
@@ -82,7 +83,6 @@ function App() {
     <div className='seminar_wrapper'>
       <h1>Список Семинаров</h1>
       <div className='seminar_list'>
-
         {
           loading ? (
             <p>Подгружаю...</p>
