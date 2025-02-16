@@ -6,6 +6,7 @@ const FETCH_ACTIONS = {
     ERROR: 'error',
     DELETE: "DELETE",
     RESTORE: "RESTORE",
+    UPDATE: "UPDATE",
   }
 
 export {FETCH_ACTIONS};
@@ -15,7 +16,8 @@ export {FETCH_ACTIONS};
   | { type: typeof FETCH_ACTIONS.SUCCESS; data: ISeminar[] } 
   | { type: typeof FETCH_ACTIONS.ERROR; error: string }
   | { type: typeof FETCH_ACTIONS.DELETE; id: number }
-  | { type: typeof FETCH_ACTIONS.RESTORE; data: ISeminar[] }; 
+  | { type: typeof FETCH_ACTIONS.RESTORE; data: ISeminar[] }
+  | { type: typeof FETCH_ACTIONS.UPDATE; seminar: ISeminar };
 
 
 export type { FetchActionsType };

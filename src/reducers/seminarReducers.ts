@@ -30,16 +30,27 @@ const initialState: IState = {
         return {
           ...state,
           loading: false,
-          error: action.error || 'An error occurred',
+          error: action.error || 'Ошибка!',
         }
       }
-
-      case FETCH_ACTIONS.DELETE:
+      
+      case FETCH_ACTIONS.UPDATE:
+        if (!action.seminar) {
+          console.error("Нет семинара, либо он не выделен.");
+          return state; 
+        }
+        return {
+          ...state,
+          items: state.items.map(item =>
+            item.id === action.seminar?.id ? action.seminar : item
+          ),
+        };
+      
+       case FETCH_ACTIONS.DELETE:
         return {
           ...state,
           items: state.items.filter(seminar => seminar.id !== action.id),
         }
-      
       default: {
         return state;
       }

@@ -12,4 +12,5 @@ export interface IAction {
   data?: ISeminar[];
   error?: string;
   id?: number;
+  seminar?: ISeminar;
 }

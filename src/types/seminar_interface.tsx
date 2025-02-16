@@ -10,4 +10,5 @@ export interface ISeminar {
 export interface SeminarProps extends ISeminar {
   //  dispatch: React.Dispatch<FetchActionsType>; 
     onDelete: (id: number) => void;
+    onEdit: (updatedSeminar: ISeminar) => void; 
 }

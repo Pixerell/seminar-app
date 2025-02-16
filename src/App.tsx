@@ -4,6 +4,7 @@ import Seminar from './components/seminar_component/seminar'
 import { initialState, seminarReducer } from './reducers/seminarReducers'
 import { FETCH_ACTIONS } from './actions'
 import axios from 'axios'
+import { ISeminar } from './types/seminar_interface'
 
 function App() {
 
@@ -16,19 +17,44 @@ function App() {
       // Симуляция ошибки, для бэкапа 
       // await new Promise((_, reject) => setTimeout(() => reject(new Error("СИМУЛИРУЮ ОШИБКУ")), 1000));
 
-      // Оптимистичное удаление
+      // Оптимистичное удаление для лучшего UI/UX, особенно если есть задержки на серверах
       dispatch({ type: FETCH_ACTIONS.DELETE, id });
       await axios.delete(`http://localhost:3000/seminars/${id}`);
-      console.log(`Seminar with ID: ${id} deleted successfully`);
+      console.log(`Семинар с ID: ${id} успешно удалён`);
 
     } catch (error) {
-      console.error("Error deleting seminar:", error);
+      console.error("Ошибка при удалении семинара:", error);
       // Если удаление не срабатывает - откат в предыдущий state
-      alert("Failed to delete seminar. Restoring previous state.");
+      alert("Не получилось удалить семинар, действие отменено.");
       dispatch({ type: FETCH_ACTIONS.RESTORE, data: previousState });
     }
   };
 
+  const handleEdit = async (updatedSeminar: ISeminar) => {
+    const previousState = [...items];
+    console.log(updatedSeminar, "новый семинар");
+    try {
+      // Оптимистичное обновление
+      dispatch({ type: FETCH_ACTIONS.UPDATE, seminar: updatedSeminar });
+      const response = await axios.put(
+        `http://localhost:3000/seminars/${updatedSeminar.id}`,
+        updatedSeminar
+      );
+      console.log(response.status, "Status Code");
+
+      if (response.status === 200) {
+        console.log(`Семинар с ID: ${updatedSeminar.id} получил разрешение обновления`);
+      } else {
+        console.error("Ошибка сервера: ", response.statusText);
+      }
+
+    } catch (error) {
+      console.error("Ошибка при обновлении семинара:", error);
+      alert("Не получилось редактировать семинар ;(. Откатываем время назад.");
+      dispatch({ type: FETCH_ACTIONS.RESTORE, data: previousState });
+    }
+  };
+  
   useEffect(() => {
     dispatch({type: FETCH_ACTIONS.PROGRESS});
 
@@ -40,7 +66,7 @@ function App() {
         }
       } catch(err){
         console.error(err);
-        const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
+        const errorMessage = err instanceof Error ? err.message : 'Неизвестная ошибка';
         dispatch({ type: FETCH_ACTIONS.ERROR, error: errorMessage });    
       }
     }
@@ -59,9 +85,9 @@ function App() {
 
         {
           loading ? (
-            <p>Loading...</p>
+            <p>Подгружаю...</p>
           ) : error ? (
-            <p>{error}...</p>
+            <p>Ошибка - {error}...</p>
           ) : (
            items.map((item) => (
             <Seminar
@@ -73,6 +99,7 @@ function App() {
               time={item.time}
               photo={item.photo}
               onDelete={handleDelete}
+              onEdit={handleEdit}
             />
            ))
           )

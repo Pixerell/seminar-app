@@ -1,5 +1,5 @@
 import './seminar.css'
-import {SeminarProps } from '../../types/seminar_interface'
+import {ISeminar, SeminarProps } from '../../types/seminar_interface'
 import Delete_Button from '../button_components/delete_button'
 import Redact_Button from '../button_components/redact_button'
 import def_img from '../../assets/def_image.png'
@@ -7,15 +7,16 @@ import def_img from '../../assets/def_image.png'
 import React from 'react'
 
 
-function Seminar({ title, description, date, time, photo, id, onDelete }: SeminarProps) {
+function Seminar({ title, description, date, time, photo, id, onDelete, onEdit }: SeminarProps) {
 
   const handleDelete = () => {
-    console.log(`Deleting seminar with ID: ${id}`);
-    onDelete(id); // Call the onDelete prop with the seminar id
+    console.log(`Удаляем семинар номер: ${id}`);
+    onDelete(id); 
   };
 
-    const handleEdit = () => {
-      console.log(`Editing with ID: ${id}`);
+    const handleEdit = (updatedSeminar: ISeminar) => {
+      console.log('Обновляем семинар:', updatedSeminar);
+      onEdit(updatedSeminar);
   };
 
 

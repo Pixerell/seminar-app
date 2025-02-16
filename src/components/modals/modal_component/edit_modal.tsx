@@ -10,21 +10,35 @@ interface EditModalProps {
   onSave: (updatedSeminar: ISeminar) => void;
 }
 
-  const EditModal: React.FC<EditModalProps> = ({ seminar, onClose, onSave }) => {
-    const [formData, setFormData] = useState({
-      ...seminar,
-      date: seminar.date ? new Date(seminar.date).toISOString().split('T')[0] : ''
-    });
+const EditModal: React.FC<EditModalProps> = ({ seminar, onClose, onSave }) => {
+
+  // Для обработки ошибок с разными видами дат
+  const convertToValidDate = (date: string): string => {
+    const [day, month, year] = date.split('.');
+    return `${year}-${month}-${day}`; 
+  };
+
+  const [formData, setFormData] = useState({
+    ...seminar,
+    date: seminar.date ? convertToValidDate(seminar.date) : '',
+  });
+  
     
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-
   const handleSave = () => {
+
+    // Форматирование даты. Мне не понравилось, что оно не выглядит как в бдшке XD
+    const formattedDate = new Date(formData.date)
+    .toLocaleDateString('en-GB') 
+    .replace(/\//g, '.');
+
     onSave({
+      
       ...formData,
-      date: new Date(formData.date).toISOString()
+      date: formattedDate
     });
   };
 
