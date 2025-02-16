@@ -33,7 +33,7 @@ h2{
     color: white;
     text-align: right;
     text-shadow: 2px 2px 2px black;
-    transform: translate(-1vh,-35vh);
+    transform: translate(-1vh,-30vh);
     margin-left: 5%;
     word-wrap: break-word;
     overflow-y: auto;
@@ -102,4 +102,27 @@ h2{
         max-height: auto;
     }
     
+}
+
+@media (max-width: 270px) {
+    .seminar_card{
+        width: auto;
+        min-height: 400px;
+        font-size: 0.8em;
+        
+    }
+    .seminar_datetime_block{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        span{
+            width: 100%;
+            text-align: left;
+            font-size: 0.75em;
+        }
+    }
+    .seminar_desc{
+        height: 60%;
+    }
 }

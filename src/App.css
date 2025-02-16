@@ -32,3 +32,18 @@ h1{
   padding: 2%;
   box-sizing: border-box;
 }
+
+@media (max-width: 270px) {
+  h1{
+    font-size: 1.3em;
+    word-break: break-all;
+  }
+  .seminar_wrapper{
+    padding: 0;
+    border-radius: 0;
+  }
+  .seminar_list{
+    border-radius: 0;
+    padding: 0;
+  }
+}
